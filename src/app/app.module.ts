@@ -8,6 +8,8 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AlertComponent } from './components/alert/alert.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     MainNavBarComponent,
     HomePageComponent,
     RegisterUserComponent,
+    AlertComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

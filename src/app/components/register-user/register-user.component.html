@@ -1,0 +1,86 @@
+<section class="container">
+  <div class="d-flex justify-content-center">
+    <div class="card m-3" style="width: 25rem;">
+      <div class="card-header d-flex justify-content-center">
+        <h5>Register</h5>
+      </div>
+      <div class="card-body">
+        <form name="form" [formGroup]="registerFormObj" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="form-group col">
+              <label>First name</label>
+              <input type="text" name="firstName" class="form-control" formControlName="firstName"
+                [ngClass]="{ 'is-invalid': isSubmitted && f.firstName.errors}">
+              <div *ngIf="isSubmitted && f.firstName.errors" class="invalid-feedback">
+                <div *ngIf="f.firstName.errors.required">first name is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col">
+              <label>Last name</label>
+              <input type="text" name="lastName" class="form-control" formControlName="lastName"
+                [ngClass]="{ 'is-invalid': isSubmitted && f.lastName.errors}">
+              <div *ngIf="isSubmitted && f.lastName.error" class="invalid-feedback">
+                <div *ngIf="f.lastName.errors.required">last name is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col">
+              <label>Email</label>
+              <input type="email" name="email" class="form-control" formControlName="email"
+                [ngClass]="{ 'is-invalid': isSubmitted && f.email.errors}">
+              <div *ngIf="isSubmitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">email is required</div>
+                <div *ngIf="f.email.errors.email">email is not valid</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col">
+              <label>DOB</label>
+              <input type="date" name="dob" class="form-control" formControlName="dob"
+                [ngClass]="{ 'is-invalid': isSubmitted && f.dob.errors}">
+              <div *ngIf="isSubmitted && f.dob.errors" class="invalid-feedback">
+                <div *ngIf="f.dob.errors.required">DOB is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col">
+              <label>Gender</label>
+              <input type="text" name="gender" class="form-control" formControlName="gender"
+                [ngClass]="{ 'is-invalid': isSubmitted && f.gender.errors}">
+              <div *ngIf="isSubmitted && f.gender.errors" class="invalid-feedback">
+                <div *ngIf="f.gender.errors.required">gender is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col">
+              <label>Password</label>
+              <input type="password" name="password" class="form-control" formControlName="password"
+                [ngClass]="{ 'is-invalid': isSubmitted && f.password.errors}">
+              <div *ngIf="isSubmitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">password is required</div>
+                <div *ngIf="f.password.errors.minlength">min 5 chars is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-3">
+              <button [disabled]="loading" class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                <span *ngIf="!loading">Register</span>
+              </button>
+            </div>
+            <div class="col-3">
+              <button class="btn btn-secondary" type="reset" (click)="onClear()">Clear</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

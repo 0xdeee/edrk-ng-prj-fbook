@@ -28,17 +28,17 @@ export class AlertService {
     return this.subject.asObservable();
   }
 
-  success(message: string, keepAfterRouteChange = false) {
+  success(message: string, keepAfterRouteChange = false): void {
     this.keepAfterRouteChange = keepAfterRouteChange;
     this.subject.next({ type: 'success', text: message });
   }
 
-  error(message: string, keepAfterRouteChange = false) {
+  error(message: string, keepAfterRouteChange = false): void {
     this.keepAfterRouteChange = keepAfterRouteChange;
     this.subject.next({ type: 'error', text: message });
   }
 
-  clear() {
+  clear(): void {
     // clear by calling subject.next() without parameters
     this.subject.next();
   }

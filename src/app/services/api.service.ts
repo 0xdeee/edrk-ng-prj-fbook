@@ -11,7 +11,8 @@ import { environment } from './../../environments/environment';
 export class ApiService {
   constructor(private httpClient: HttpClient) {}
 
-  register(newUser: User): Observable<object> {
+  register(newUser: User): Observable<any> {
+    console.table(newUser);
     return this.httpClient
       .post(`${environment.apiUrl}/users/register`, newUser)
       .pipe(
