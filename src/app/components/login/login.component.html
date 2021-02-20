@@ -1,1 +1,45 @@
-<p>login works!</p>
+<section class="container">
+  <div class="d-flex justify-content-center">
+    <div class="card m-3" style="width: 25rem;">
+      <div class="card-header d-flex justify-content-center">
+        <h5>Login</h5>
+      </div>
+      <div class="card-body">
+        <form name="form" [formGroup]="loginFormObj" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="form-group col">
+              <label>Email</label>
+              <input type="email" name="email" class="form-control" formControlName="email"
+                [ngClass]="{ 'is-invalid': isSubmitted && f.email.errors}">
+              <div *ngIf="isSubmitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">email is required</div>
+                <div *ngIf="f.email.errors.email">email is not valid</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col">
+              <label>Password</label>
+              <input type="password" name="password" class="form-control" formControlName="password"
+                [ngClass]="{ 'is-invalid': isSubmitted && f.password.errors}">
+              <div *ngIf="isSubmitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">password is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-6">
+              <button class="btn btn-secondary" (click)="forgotPassword()">Forgot Passord?</button>
+            </div>
+            <div class="col-3">
+              <button [disabled]="loading" class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                <span *ngIf="!loading">Login</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

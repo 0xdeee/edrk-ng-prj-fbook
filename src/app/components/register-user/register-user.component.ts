@@ -40,12 +40,12 @@ export class RegisterUserComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.isSubmitted = true;
     if (!this.registerFormObj.valid && this.registerFormObj.invalid) {
       this.alertService.error('form data is invalid/empty', false);
       return;
     }
     this.loading = true;
-    this.isSubmitted = true;
     this.registerFormData = this.registerFormObj.value;
     console.table(this.registerFormData);
     this.apiService
