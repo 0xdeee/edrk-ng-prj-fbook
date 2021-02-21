@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
   }
 
   forgotPassword(): void {
+    this.loginFormObj.reset();
     this.router.navigate(['/passwordreset']);
   }
 }

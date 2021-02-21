@@ -40,7 +40,7 @@ export class ApiService {
       );
   }
 
-  login(loginForm: any): Observable<any> {
+  login(loginForm: any): Observable<LoginResponse> {
     return this.httpClient
       .post<LoginResponse>(
         `${environment.apiUrl}/users/authenticate`,
@@ -56,6 +56,36 @@ export class ApiService {
         catchError((error) => {
           console.error(error);
           return throwError(error);
+        })
+      );
+  }
+
+  resetPasswordValidate(email: any): Observable<LoginResponse> {
+    return this.httpClient
+      .post<LoginResponse>(`${environment.apiUrl}/users/finduserbyemail`, email)
+      .pipe(
+        map((response) => {
+          console.table(response);
+          return response;
+        }),
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  updateUserDetails(userId: any, newData: any): Observable<any> {
+    return this.httpClient
+      .put(`${environment.apiUrl}/users/${userId}`, newData)
+      .pipe(
+        map((response) => {
+          console.log(response);
+          return true;
+        }),
+        catchError((error) => {
+          console.error(error);
+          return error;
         })
       );
   }
