@@ -11,6 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './components/alert/alert.component';
 import { LoginComponent } from './components/login/login.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { UserCardComponent } from './components/user-card/user-card.component';
+import { CreatePostComponent } from './components/create-post/create-post.component';
+import { NewFeedComponent } from './components/new-feed/new-feed.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     AlertComponent,
     LoginComponent,
     ForgotPasswordComponent,
+    UserCardComponent,
+    CreatePostComponent,
+    NewFeedComponent,
   ],
   imports: [
     BrowserModule,
