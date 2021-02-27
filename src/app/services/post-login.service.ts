@@ -23,10 +23,14 @@ export class PostLoginService {
     });
   }
 
-  getImage(photoId: string): Observable<any> {
-    const headers = new HttpHeaders()
+  getHeaders(): HttpHeaders {
+    return new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${this.currentUser.token}`);
+  }
+
+  getImage(photoId: string): Observable<any> {
+    const headers = this.getHeaders();
     // console.log(headers);
     return this.httpClient
       .get(`${environment.apiUrl}/files/${photoId}`, {
@@ -46,9 +50,7 @@ export class PostLoginService {
   }
 
   getPosts(): Observable<Post[]> {
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Authorization', `Bearer ${this.currentUser.token}`);
+    const headers = this.getHeaders();
     // console.log(headers);
     return this.httpClient
       .get<Post[]>(`${environment.apiUrl}/posts/`, { headers })
@@ -65,9 +67,7 @@ export class PostLoginService {
   }
 
   createPost(newPost: NewPost): Observable<any> {
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Authorization', `Bearer ${this.currentUser.token}`);
+    const headers = this.getHeaders();
     return this.httpClient
       .post(`${environment.apiUrl}/posts/createpost`, newPost, { headers })
       .pipe(
@@ -83,9 +83,7 @@ export class PostLoginService {
   }
 
   getAllUsers(): Observable<Users[]> {
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Authorization', `Bearer ${this.currentUser.token}`);
+    const headers = this.getHeaders();
     return this.httpClient
       .get<Users[]>(`${environment.apiUrl}/users/`, { headers })
       .pipe(
@@ -100,9 +98,7 @@ export class PostLoginService {
   }
 
   createFriendRequest(friendRequest: FriendRequest): Observable<any> {
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Authorization', `Bearer ${this.currentUser.token}`);
+    const headers = this.getHeaders();
     return this.httpClient
       .post(`${environment.apiUrl}/friends/createrequest`, friendRequest, {
         headers,
@@ -120,9 +116,7 @@ export class PostLoginService {
   }
 
   getFriendsList(): Observable<any[]> {
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Authorization', `Bearer ${this.currentUser.token}`);
+    const headers = this.getHeaders();
     return this.httpClient
       .get<any[]>(`${environment.apiUrl}/friends/`, { headers })
       .pipe(
