@@ -48,7 +48,12 @@ export class ForgotPasswordComponent implements OnInit {
     return this.passwordResetNewPasswordObj.controls;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.apiService.currentUser.subscribe((response) => {
+      this.isValidated = response ? true : false;
+      this.fetchedUser = response;
+    });
+  }
 
   onSubmitValidate(): void {
     this.alertService.clear();
@@ -76,6 +81,7 @@ export class ForgotPasswordComponent implements OnInit {
             this.passwordResetValidateObj.value.dob
         ) {
           this.fetchedUser = response[0];
+          console.log(this.fetchedUser);
           this.isValidated = true;
           this.isSubmitted = false;
           this.loading = false;
@@ -103,7 +109,7 @@ export class ForgotPasswordComponent implements OnInit {
       password: this.passwordResetNewPasswordObj.value.password,
     };
     this.apiService
-      .updateUserDetails(this.fetchedUser.id, passwordResetRequest)
+      .updateUserDetails(this.fetchedUser._id, passwordResetRequest)
       .pipe(first())
       .subscribe(
         (response) => {
@@ -113,6 +119,9 @@ export class ForgotPasswordComponent implements OnInit {
             'you have successfully reset the password',
             true
           );
+          if (this.apiService.currentUserValue) {
+            this.apiService.logout();
+          }
           this.router.navigate(['/login']);
         },
         (error) => {
