@@ -15,6 +15,10 @@ import { UserCardComponent } from './components/user-card/user-card.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { NewFeedComponent } from './components/new-feed/new-feed.component';
 import { PostSortPipe } from './pipes/post-sort.pipe';
+import { NetworkPageComponent } from './components/network-page/network-page.component';
+import { FriendsPageComponent } from './components/friends-page/friends-page.component';
+import { SettingsPageComponent } from './components/settings-page/settings-page.component';
+import { UsersPageComponent } from './components/users-page/users-page.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,10 @@ import { PostSortPipe } from './pipes/post-sort.pipe';
     CreatePostComponent,
     NewFeedComponent,
     PostSortPipe,
+    NetworkPageComponent,
+    FriendsPageComponent,
+    SettingsPageComponent,
+    UsersPageComponent,
   ],
   imports: [
     BrowserModule,

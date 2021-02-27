@@ -5,6 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { LoginResponse } from '../models/login-response/login-response.module';
 import { NewPost, Post } from '../models/posts/posts.model';
+import { Users } from '../models/user/user.module';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -81,12 +82,12 @@ export class PostLoginService {
       );
   }
 
-  fetchAllUsers(): Observable<LoginResponse[]> {
+  getAllUsers(): Observable<Users[]> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${this.currentUser.token}`);
     return this.httpClient
-      .get<LoginResponse[]>(`${environment.apiUrl}/users/`, { headers })
+      .get<Users[]>(`${environment.apiUrl}/users/`, { headers })
       .pipe(
         map((response) => {
           return response;
