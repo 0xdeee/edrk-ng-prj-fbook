@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { LoginResponse } from '../models/login-response/login-response.module';
+import { NewPost, Post } from '../models/posts/posts.model';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -21,16 +22,13 @@ export class PostLoginService {
     });
   }
 
-  getImage(): Observable<any> {
-    if (!this.currentUser) {
-      this.getLoggedInUser();
-    }
+  getImage(photoId: string): Observable<any> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${this.currentUser.token}`);
-    console.log(headers);
+    // console.log(headers);
     return this.httpClient
-      .get(`${environment.apiUrl}/files/${this.currentUser.photoId}`, {
+      .get(`${environment.apiUrl}/files/${photoId}`, {
         headers,
         responseType: 'blob' as 'json',
       })
@@ -41,6 +39,60 @@ export class PostLoginService {
         }),
         catchError((error) => {
           console.error(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  getPosts(): Observable<Post[]> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${this.currentUser.token}`);
+    // console.log(headers);
+    return this.httpClient
+      .get<Post[]>(`${environment.apiUrl}/posts/`, { headers })
+      .pipe(
+        map((response) => {
+          console.log(response);
+          return response;
+        }),
+        catchError((error) => {
+          console.log(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  createPost(newPost: NewPost): Observable<any> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${this.currentUser.token}`);
+    return this.httpClient
+      .post(`${environment.apiUrl}/posts/createpost`, newPost, { headers })
+      .pipe(
+        map((response) => {
+          console.log(response);
+          return response;
+        }),
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  fetchAllUsers(): Observable<LoginResponse[]> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${this.currentUser.token}`);
+    return this.httpClient
+      .get<LoginResponse[]>(`${environment.apiUrl}/users/`, { headers })
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
+          console.log(error);
           return throwError(error);
         })
       );

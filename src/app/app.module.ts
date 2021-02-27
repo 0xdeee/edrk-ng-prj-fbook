@@ -14,6 +14,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { NewFeedComponent } from './components/new-feed/new-feed.component';
+import { PostSortPipe } from './pipes/post-sort.pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NewFeedComponent } from './components/new-feed/new-feed.component';
     UserCardComponent,
     CreatePostComponent,
     NewFeedComponent,
+    PostSortPipe,
   ],
   imports: [
     BrowserModule,

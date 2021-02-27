@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginResponse } from 'src/app/models/login-response/login-response.module';
+import { ApiService } from 'src/app/services/api.service';
 import { PostLoginService } from 'src/app/services/post-login.service';
 
 @Component({
@@ -8,10 +10,15 @@ import { PostLoginService } from 'src/app/services/post-login.service';
 })
 export class UserCardComponent implements OnInit {
   imageBlobUrl: any;
-  constructor(private postLoginService: PostLoginService) {}
+  currentUser: LoginResponse;
+  constructor(
+    private postLoginService: PostLoginService,
+    private apiService: ApiService
+  ) {}
 
   ngOnInit(): void {
-    this.postLoginService.getImage().subscribe(
+    this.getLoggedInUser();
+    this.postLoginService.getImage(this.currentUser.photoId).subscribe(
       (response) => {
         console.log(response);
         this.createImageFromBlob(response);
@@ -20,6 +27,12 @@ export class UserCardComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  getLoggedInUser(): void {
+    this.apiService.currentUser.subscribe((loggedInUser) => {
+      this.currentUser = loggedInUser;
+    });
   }
 
   createImageFromBlob(image: Blob): void {

@@ -1,1 +1,20 @@
-<p>new-feed works!</p>
+<div class="container-flex">
+  <div *ngFor="let post of posts">
+    <div class="card mb-3" style="max-width: 750px;">
+      <div class="row g-0">
+        <div class="col-sm-2 mx-auto my-auto" style="max-width: 3rem; max-height: 3rem;">
+          <img class="card-img-top img-fluid img-thumbnail" style="border-radius: 100%;"
+            src="./../../../assets/default-user-picture.jpg" alt="profile photo">
+        </div>
+        <div class="col-sm-10">
+          <div class="card-body">
+            <h5 class="card-title">@{{post.userName}}</h5>
+            <p class="card-text ">{{post.post}}</p>
+            <p class="card-text"><small class="text-muted">Last updated {{ getDiff(post.createdDate) }} ago</small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

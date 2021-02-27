@@ -1,1 +1,16 @@
-<p>create-post works!</p>
+<div class="container-flex">
+  <form name="post" [formGroup]="postDataObj" (ngSubmit)="onSubmit()">
+    <div class="form-group input-group col mb-3" style="max-width: 750px;">
+      <textarea name="postData" class="form-control" formControlName="postData"
+        placeholder="Write a post/Upload a picture"
+        [ngClass]="{ 'is-invalid': isSubmitted && postDataObj.controls.postData.errors}" rows="3"></textarea>
+      <button class="btn btn-outline-secondary" id="button-addon2">Post</button>
+      <div *ngIf="isSubmitted && postDataObj.controls.postData.errors" class="invalid-feedback">
+        <div>Post cannot be empty</div>
+      </div>
+    </div>
+    <div *ngIf="isSubmitted && postDataObj.controls.postData.errors" class="invalid-feedback">
+      <div>Post cannot be empty</div>
+    </div>
+  </form>
+</div>

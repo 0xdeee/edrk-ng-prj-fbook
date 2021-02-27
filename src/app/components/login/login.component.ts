@@ -21,6 +21,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private apiService: ApiService
   ) {
+    if (localStorage.getItem('currentUser')) {
+      localStorage.removeItem('currentUser');
+    }
     this.loginFormObj = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
