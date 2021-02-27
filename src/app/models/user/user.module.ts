@@ -28,3 +28,9 @@ export class Users {
   __v: number;
   token: string;
 }
+
+export class FriendRequest {
+  userId: string;
+  friendId: string;
+  status: string;
+}

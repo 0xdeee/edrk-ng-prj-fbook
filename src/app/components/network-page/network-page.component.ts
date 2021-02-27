@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Users } from 'src/app/models/user/user.module';
+import { FriendRequest, User, Users } from 'src/app/models/user/user.module';
 import { AlertService } from 'src/app/services/alert.service';
+import { ApiService } from 'src/app/services/api.service';
 import { PostLoginService } from 'src/app/services/post-login.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class NetworkPageComponent implements OnInit {
   users: Users[];
   constructor(
     private postLoginService: PostLoginService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private apiService: ApiService
   ) {}
 
   ngOnInit(): void {
@@ -24,6 +26,24 @@ export class NetworkPageComponent implements OnInit {
       (error) => {
         this.alertService.clear();
         this.alertService.error('error occurred while fetching all users');
+      }
+    );
+  }
+
+  createFriendRequest(user: Users): void {
+    const friendRequest = new FriendRequest();
+    friendRequest.userId = this.apiService.currentUserValue._id;
+    friendRequest.friendId = user._id;
+    friendRequest.status = 'Request Pending';
+    this.postLoginService.createFriendRequest(friendRequest).subscribe(
+      (response) => {
+        console.log('friend request create successfully');
+        this.alertService.success(
+          `Friend request was sent to ${user.email} successfully`
+        );
+      },
+      (error) => {
+        console.error(error);
       }
     );
   }

@@ -12,10 +12,15 @@
                 <img class="card-img-top img-fluid img-thumbnail" style="border-radius: 100%;"
                   src="./../../../assets/default-user-picture.jpg" alt="profile photo">
               </div>
-              <div class="col-sm-10">
+              <div class="col-sm-6">
                 <div class="card-body">
                   <h5 class="card-title">@{{user.firstName + ' ' + user.lastName}}</h5>
                   <p class="card-text ">{{user.email}}</p>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card-body">
+                  <button class="btn btn-primary" (click)="createFriendRequest(user)">Add Friend</button>
                 </div>
               </div>
             </div>

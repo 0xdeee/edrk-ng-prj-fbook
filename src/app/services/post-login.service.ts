@@ -5,7 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { LoginResponse } from '../models/login-response/login-response.module';
 import { NewPost, Post } from '../models/posts/posts.model';
-import { Users } from '../models/user/user.module';
+import { FriendRequest, Users } from '../models/user/user.module';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -94,6 +94,44 @@ export class PostLoginService {
         }),
         catchError((error) => {
           console.log(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  createFriendRequest(friendRequest: FriendRequest): Observable<any> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${this.currentUser.token}`);
+    return this.httpClient
+      .post(`${environment.apiUrl}/friends/createrequest`, friendRequest, {
+        headers,
+      })
+      .pipe(
+        map((response) => {
+          console.log(response);
+          return response;
+        }),
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  getFriendsList(): Observable<any[]> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${this.currentUser.token}`);
+    return this.httpClient
+      .get<any[]>(`${environment.apiUrl}/friends/`, { headers })
+      .pipe(
+        map((response) => {
+          console.log(response);
+          return response;
+        }),
+        catchError((error) => {
+          console.error(error);
           return throwError(error);
         })
       );

@@ -1,1 +1,27 @@
-<p>friends-page works!</p>
+<section class="container-flex">
+  <div class="row">
+    <div class="col-4">
+      <app-user-card></app-user-card>
+    </div>
+    <div class="col-8">
+      <div class="container-flex mt-5">
+        <div *ngFor="let friend of friends">
+          <div class="card mb-3" style="max-width: 750px;">
+            <div class="row g-0">
+              <div class="col-sm-2 mx-auto my-auto" style="max-width: 3rem; max-height: 3rem;">
+                <img class="card-img-top img-fluid img-thumbnail" style="border-radius: 100%;"
+                  src="./../../../assets/default-user-picture.jpg" alt="profile photo">
+              </div>
+              <div class="col-sm-10">
+                <div class="card-body">
+                  <h5 class="card-title">@{{friend.firstName + ' ' + friend.lastName}}</h5>
+                  <p class="card-text ">{{friend.email}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
