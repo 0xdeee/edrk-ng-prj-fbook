@@ -150,4 +150,20 @@ export class PostLoginService {
         })
       );
   }
+
+  deletePost(postId: string): Observable<any> {
+    const headers = this.getHeaders();
+    return this.httpClient
+      .delete(`${environment.apiUrl}/posts/${postId}`, { headers })
+      .pipe(
+        map((response) => {
+          console.log('post deleted');
+          return response;
+        }),
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
 }

@@ -28,6 +28,7 @@ export class NewFeedComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.isLoading = true;
     this.refreshNewFeed();
+    this.currentUser = this.apiService.currentUserValue;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -74,5 +75,11 @@ export class NewFeedComponent implements OnInit, OnChanges {
         ? `${timeElapsed.toString()} day`
         : `${timeElapsed.toString()} days`;
     }
+  }
+
+  deletePost(postId: string): void {
+    this.postLoginService.deletePost(postId).subscribe(() => {
+      this.refreshNewFeed();
+    });
   }
 }
