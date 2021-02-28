@@ -11,14 +11,17 @@ export class AppComponent {
   title = 'edrk-ng-prj-fbook';
   currentUser: LoginResponse;
   isLoggedIn = false;
+  isAdmin = false;
 
   constructor(private apiService: ApiService) {
     this.apiService.currentUser.subscribe((loggedInUser) => {
       this.currentUser = loggedInUser;
       if (this.currentUser) {
-        this.isLoggedIn = true;
+        this.isLoggedIn = this.currentUser ? true : false;
+        this.isAdmin = this.currentUser.isAdmin ? true : false;
       } else {
         this.isLoggedIn = false;
+        this.isAdmin = false;
       }
     });
   }

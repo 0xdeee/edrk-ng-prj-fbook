@@ -13,7 +13,7 @@
           <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
             <a class="nav-link" routerLink="home">Home</a>
           </li>
-          <li class="nav-item" routerLinkActive="active">
+          <li class="nav-item" routerLinkActive="active" *ngIf="isAdmin">
             <a class="nav-link" routerLink="users">Users</a>
           </li>
           <li class="nav-item" routerLinkActive="active">
