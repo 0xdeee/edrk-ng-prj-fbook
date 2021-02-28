@@ -12,6 +12,8 @@ export class UserCardComponent implements OnInit {
   imageBlobUrl: any;
   currentUser: LoginResponse;
   isImageLoaded = false;
+  userPosts: number;
+  NewtworkCount: number;
   constructor(
     private postLoginService: PostLoginService,
     private apiService: ApiService
@@ -28,6 +30,30 @@ export class UserCardComponent implements OnInit {
       (error) => {
         console.error(error);
       }
+    );
+    this.postLoginService
+      .getUserSpecificPosts(this.currentUser._id)
+      .subscribe((response) => {
+        this.userPosts = response.length;
+      });
+
+    this.postLoginService.getAllUsers().subscribe(
+      (allUsers) => {
+        this.postLoginService.getFriendsList().subscribe(
+          (allFriends) => {
+            const filteredRequests = allFriends.filter((req) => {
+              return this.apiService.currentUserValue._id === req.userId;
+            });
+            this.NewtworkCount = allUsers.filter((user) => {
+              return filteredRequests.some((friend) => {
+                return friend.friendId === user._id;
+              });
+            }).length;
+          },
+          (error) => {}
+        );
+      },
+      (error) => {}
     );
   }
 

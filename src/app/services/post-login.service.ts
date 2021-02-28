@@ -130,4 +130,24 @@ export class PostLoginService {
         })
       );
   }
+
+  getUserSpecificPosts(id: string): Observable<any[]> {
+    const headers = this.getHeaders();
+    return this.httpClient
+      .post<any[]>(
+        `${environment.apiUrl}/posts/findpostbyuserid`,
+        { id },
+        { headers }
+      )
+      .pipe(
+        map((response) => {
+          console.log(response);
+          return response;
+        }),
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
 }

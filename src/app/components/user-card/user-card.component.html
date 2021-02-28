@@ -1,14 +1,24 @@
 <div class="card mt-5 mx-auto" style="width: 15rem;">
   <div class="card-header">
-    <img *ngIf="!isImageLoaded" class="card-img-top img-fluid img-thumbnail" style="border-radius: 100%;"
+    <img *ngIf="!isImageLoaded" class="card-img-top img-fluid" style="border-radius: 100%;"
       src="./../../../assets/default-user-picture.jpg" alt="profile photo">
-    <img *ngIf="isImageLoaded" class="card-img-top img-fluid img-thumbnail" style="border-radius: 100%;"
-      [src]="imageBlobUrl" alt="profile photo">
+    <img *ngIf="isImageLoaded" class="card-img-top img-fluid" style="border-radius: 100%;" [src]="imageBlobUrl"
+      alt="profile photo">
   </div>
-  <div class="card-body">
-    <h5 class="card-title">XX Connections</h5>
+  <div class="card-body my-0 pb-0 mx-auto">
+    <h5 class="card-title">
+      <div *ngIf="!NewtworkCount" class="spinner-border spinner-border-sm" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p *ngIf="NewtworkCount"><span class="text-primary">{{NewtworkCount}}</span> Connections</p>
+    </h5>
   </div>
-  <div class="card-body">
-    <h5 class="card-title">XX Posts</h5>
+  <div class="card-body my-0 pb-0 mx-auto">
+    <h5 class="card-title">
+      <div *ngIf="!userPosts" class="spinner-border spinner-border-sm" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p *ngIf="userPosts"><span class="text-primary">{{userPosts}}</span> Posts</p>
+    </h5>
   </div>
 </div>
