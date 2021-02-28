@@ -1,7 +1,9 @@
 <div class="card mt-5 mx-auto" style="width: 15rem;">
   <div class="card-header">
-    <img class="card-img-top img-fluid img-thumbnail" style="border-radius: 100%;" [src]="imageBlobUrl"
-      alt="profile photo">
+    <img *ngIf="!isImageLoaded" class="card-img-top img-fluid img-thumbnail" style="border-radius: 100%;"
+      src="./../../../assets/default-user-picture.jpg" alt="profile photo">
+    <img *ngIf="isImageLoaded" class="card-img-top img-fluid img-thumbnail" style="border-radius: 100%;"
+      [src]="imageBlobUrl" alt="profile photo">
   </div>
   <div class="card-body">
     <h5 class="card-title">XX Connections</h5>

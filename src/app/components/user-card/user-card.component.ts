@@ -11,12 +11,14 @@ import { PostLoginService } from 'src/app/services/post-login.service';
 export class UserCardComponent implements OnInit {
   imageBlobUrl: any;
   currentUser: LoginResponse;
+  isImageLoaded = false;
   constructor(
     private postLoginService: PostLoginService,
     private apiService: ApiService
   ) {}
 
   ngOnInit(): void {
+    this.isImageLoaded = false;
     this.getLoggedInUser();
     this.postLoginService.getImage(this.currentUser.photoId).subscribe(
       (response) => {
@@ -44,7 +46,7 @@ export class UserCardComponent implements OnInit {
       },
       false
     );
-
+    this.isImageLoaded = true;
     if (image) {
       reader.readAsDataURL(image);
     }

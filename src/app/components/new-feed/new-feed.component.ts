@@ -19,16 +19,19 @@ export class NewFeedComponent implements OnInit, OnChanges {
   @Input() newPostAdded;
   posts: Post[];
   currentUser: LoginResponse;
+  isLoading = false;
   constructor(
     private postLoginService: PostLoginService,
     private apiService: ApiService
   ) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.refreshNewFeed();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.isLoading = true;
     this.refreshNewFeed();
   }
 
@@ -43,6 +46,7 @@ export class NewFeedComponent implements OnInit, OnChanges {
           );
         });
         this.posts = response;
+        this.isLoading = false;
       },
       (error) => {
         console.log(error);

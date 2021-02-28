@@ -4,7 +4,12 @@
       <app-user-card></app-user-card>
     </div>
     <div class="col-8">
-      <div class="container-flex mt-5">
+      <div *ngIf="isLoading" class="d-flex justify-content-center mt-5">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <div *ngIf="!isLoading" class="container-flex mt-5">
         <div *ngFor="let user of users">
           <div class="card mb-3" style="max-width: 750px;">
             <div class="row g-0">

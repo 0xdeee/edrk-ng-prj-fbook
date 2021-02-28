@@ -11,6 +11,7 @@ import { PostLoginService } from 'src/app/services/post-login.service';
 })
 export class NetworkPageComponent implements OnInit {
   users: Users[];
+  isLoading = false;
   constructor(
     private postLoginService: PostLoginService,
     private alertService: AlertService,
@@ -18,10 +19,12 @@ export class NetworkPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.postLoginService.getAllUsers().subscribe(
       (response) => {
         this.alertService.clear();
         this.users = response;
+        this.isLoading = false;
       },
       (error) => {
         this.alertService.clear();

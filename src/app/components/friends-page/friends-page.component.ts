@@ -14,6 +14,7 @@ export class FriendsPageComponent implements OnInit {
   friendRequests: any[];
   filteredRequests: any[];
   allUsers: Users[];
+  isLoading = false;
   constructor(
     private postLoginService: PostLoginService,
     private alertService: AlertService,
@@ -21,6 +22,7 @@ export class FriendsPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.postLoginService.getAllUsers().subscribe(
       (response) => {
         this.allUsers = response;
@@ -36,6 +38,7 @@ export class FriendsPageComponent implements OnInit {
                 return friend.friendId === user._id;
               });
             });
+            this.isLoading = false;
           },
           (error) => {
             this.alertService.clear();
