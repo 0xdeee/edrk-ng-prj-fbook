@@ -1,0 +1,11 @@
+nav {
+  position: sticky;
+  top: -2px;
+  z-index: 1;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar {
+  margin-bottom: 2px !important;
+}

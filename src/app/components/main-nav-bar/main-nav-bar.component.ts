@@ -8,6 +8,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class MainNavBarComponent implements OnInit {
   @Input() isLoggedIn: boolean;
+  collapse = true;
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {}
